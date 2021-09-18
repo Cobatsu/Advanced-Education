@@ -7,7 +7,8 @@ const mongoose = require("mongoose");
 const PORT_PRODUCTION = "https://study-online.herokuapp.com/";
 const PORT_DEVELOPMENT = "http://localhost:3000/";
 
-const MAIN_PORT = PORT_PRODUCTION;
+const MAIN_PORT =
+ process.env.NODE_ENV == "production" ? PORT_PRODUCTION : PORT_DEVELOPMENT;
 
 const setAuthMail = () => {
  var transporter = nodemailer.createTransport({

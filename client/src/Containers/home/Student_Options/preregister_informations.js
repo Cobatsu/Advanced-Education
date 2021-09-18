@@ -634,7 +634,7 @@ const StudentInformations = ({match, ...rest}) => {
        <InnerLink
         className='responsiveLink'
         style={{textDecoration: "none", color: "#00909e"}}
-        href={"http://localhost:3000/" + fileName}
+        href={"http://localhost:3001/api/" + fileName}
         target='_blank'
        >
         {ImageFields[index] || fileName.split("_")[2].split(".")[0]}
