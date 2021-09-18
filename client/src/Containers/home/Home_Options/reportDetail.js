@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import {Context} from "../../../Context/Context";
 
-import {Regions} from "../../../Regions/regions";
+import {Regions, countryList} from "../../../Regions/regions";
 import Circle from "../../../UI/Circle";
 import Modal from "../../../UI/sentModal";
 import Stage from "../../../UI/backStage";
@@ -254,10 +254,10 @@ const ReportDetail = ({match, ...rest}) => {
  if (initalReportStates.reportType) {
   if (initalReportStates.region) {
    const City = Regions.find(item => item["il"] === initalReportStates.region); //just get first one matched
-   var townships = City.ilceleri;
+   var townships = City?.ilceleri;
   }
  }
-
+ console.log(townships);
  const submitUpdatedReport = e => {
   e.preventDefault();
 

@@ -107,6 +107,7 @@ module.exports.addContactReport = async (req, res, next) => {
  try {
   const newReport = new Reports({
    ...contactData,
+   reportType: "studentReport",
   });
 
   await newReport.save();
@@ -157,11 +158,6 @@ module.exports.reportSearch = async (req, res, next) => {
    if (user.role !== role)
     searchData = {...searchData, allowedToSee: {$all: [personelReportID]}};
    else searchData = {...searchData, allowedToSee: {$all: [user._id]}};
-  } else {
-   if (user.role !== role)
-    searchData = {...searchData, allowedToSee: {$all: [personelReportID]}};
-
-   searchData = {...searchData, "allowedToSee.0": {$exists: true}};
   }
 
   var documentCount = await Reports.countDocuments(searchData);
@@ -223,7 +219,7 @@ module.exports.updateReport = async (req, res, next) => {
  body["owner"] = body["owner"] || {};
 
  try {
-  if (body.meetingDetails && !body["owner"]._id && user.role !== "Admin") {
+  if (body.meetingDetails && !body["owner"]._id) {
    body["isContacted"] = true;
    body["owner"] = user._id;
 
@@ -232,7 +228,7 @@ module.exports.updateReport = async (req, res, next) => {
    }
   }
 
-  if (!body.meetingDetails && user.role !== "Admin") {
+  if (!body.meetingDetails) {
    body["owner"] = null;
    body["isContacted"] = false;
   }
