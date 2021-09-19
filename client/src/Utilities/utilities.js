@@ -131,6 +131,8 @@ export const reportListHelperPackage = id => {
    </Capsule>,
    !item.isContacted ? (
     "—"
+   ) : item.isContacted && !item.owner ? (
+    <span style={{fontSize: 12, color: "grey"}}>eski personel</span>
    ) : item.owner?._id == id ? (
     <Capsule> {restrictWord(fullName, 15)} </Capsule>
    ) : (

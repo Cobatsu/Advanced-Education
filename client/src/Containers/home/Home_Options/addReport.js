@@ -156,9 +156,11 @@ export const AddReport = React.memo(props => {
  };
 
  if (reportType) {
-  if (initialReportState.region) {
-   const City = Regions.find(item => item["il"] === initialReportState.region); //just get first one matched
-   var townships = City.ilceleri;
+  var isRegionCity = Regions.find(
+   item => item["il"] === initialReportState.region
+  );
+  if (isRegionCity) {
+   var townships = isRegionCity.ilceleri;
   }
  }
 
@@ -387,7 +389,7 @@ export const Report = ({
        : countryList.map(item => <MenuItem value={item}>{item}</MenuItem>)}
      </TextField>
 
-     {State.region && !isContactStudent ? (
+     {State.region && townships ? (
       <TextField
        disabled={disable}
        InputLabelProps={{style: {zIndex: 1}}}

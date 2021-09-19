@@ -257,7 +257,7 @@ const ReportDetail = ({match, ...rest}) => {
    var townships = City?.ilceleri;
   }
  }
- console.log(townships);
+
  const submitUpdatedReport = e => {
   e.preventDefault();
 
@@ -321,7 +321,7 @@ const ReportDetail = ({match, ...rest}) => {
   const {id} = match.params;
   makeDeleteReportRequest("delete", id, isLoggedinf, setDeleted);
  };
-
+ console.log(initalReportStates);
  return loading ? (
   <Circle marginTop={30} Load={loading} position='static' />
  ) : (
@@ -391,7 +391,7 @@ const ReportDetail = ({match, ...rest}) => {
        marginTop: 40,
       }}
      >
-      {initalReportStates.owner &&
+      {initalReportStates.owner?._id &&
        initalReportStates.isContacted &&
        initalReportStates.owner._id != user._id && (
         <IconForTextLink
