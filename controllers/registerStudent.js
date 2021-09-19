@@ -3,7 +3,6 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const Reports = require("../models/reports");
-const mongoose = require("mongoose");
 const PORT_PRODUCTION = "https://study-online.herokuapp.com/";
 const PORT_DEVELOPMENT = "http://localhost:3000/";
 
@@ -49,7 +48,7 @@ module.exports.add = async (req, res, next) => {
    return res.json({result: "Error"});
   }
 
-  const updated = await Reports.updateOne(
+  await Reports.updateOne(
    {_id: tokenData.contactReportID},
    {$set: {isFormFilled: true}}
   );

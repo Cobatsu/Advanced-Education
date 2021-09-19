@@ -278,7 +278,11 @@ const ReportDetail = ({match, ...rest}) => {
    const element = initalReportStates[key];
 
    if (initalReportStates.reportType === "schoolReport") {
-    if (!element && typeof initalReportStates[key] === "string") {
+    if (
+     !element &&
+     typeof initalReportStates[key] === "string" &&
+     key !== "townShip"
+    ) {
      return setEmptyWarning(true);
     } else {
      if (key !== "meetingDate" && typeof initalReportStates[key] === "string") {

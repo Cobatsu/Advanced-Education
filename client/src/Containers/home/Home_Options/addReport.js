@@ -163,7 +163,7 @@ export const AddReport = React.memo(props => {
    var townships = isRegionCity.ilceleri;
   }
  }
-
+ console.log(initialReportState);
  const SubmitReport = e => {
   setIsSubmitted(true);
 
@@ -183,14 +183,19 @@ export const AddReport = React.memo(props => {
    const element = initialReportState[key];
 
    if (reportType === "schoolReport") {
-    if (!element) {
+    if (!element && !isRegionCity && key !== "townShip") {
      return setEmptyWarning(true);
     } else {
      if (key !== "meetingDate")
       initialReportState[key] = initialReportState[key].trim();
     }
    } else {
-    if (!element && key !== "schoolName") {
+    if (
+     !element &&
+     key !== "schoolName" &&
+     !isRegionCity &&
+     key !== "townShip"
+    ) {
      return setEmptyWarning(true);
     } else {
      if (key !== "meetingDate")
@@ -389,7 +394,7 @@ export const Report = ({
        : countryList.map(item => <MenuItem value={item}>{item}</MenuItem>)}
      </TextField>
 
-     {State.region && townships ? (
+     {State.region && townships && !isContactStudent ? (
       <TextField
        disabled={disable}
        InputLabelProps={{style: {zIndex: 1}}}
